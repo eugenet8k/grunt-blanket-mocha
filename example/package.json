@@ -20,12 +20,15 @@
     "grunt": "grunt",
     "test": "grunt test"
   },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
   "devDependencies": {
-    "blanket": "1.1.6",
+    "blanket": "~1.2.3",
     "chai": "1.8.1",
-    "grunt-mocha-blanket": "0.6.1",
-    "grunt-cli": "1.2.0",
-    "grunt": "0.4.5",
-    "mocha": "2.0.1"
+    "grunt-mocha-blanket": "0.6.2",
+    "grunt-cli": "~1.2.0",
+    "grunt": "~0.4.5",
+    "mocha": "~3.1.0"
   }
 }
