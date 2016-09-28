@@ -1,14 +1,8 @@
-# grunt-blanket-mocha
-
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-
-# Unmaintained!
-
-This project is no longer maintained.  Feel free to fork and continue development!
+# grunt-mocha-blanket
 
 > Headless Blanket.js code coverage and Mocha testing via PhantomJS
 
-## Wat?
+## What?
 
 Other plugins look similar, but are different in that they:
 
@@ -32,18 +26,18 @@ configurations of that plugin as of that version.  Please see that repo for more
 Changes from the upstream plugin will be merged periodically.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `~0.4.5`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-blanket-mocha --save-dev
+npm install grunt-mocha-blanket --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-blanket-mocha');
+grunt.loadNpmTasks('grunt-mocha-blanket');
 ```
 
 ## Dependencies
@@ -93,7 +87,7 @@ other scripts:
 ```html
 <script>
     if (window.PHANTOMJS) {
-        blanket.options("reporter", "../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+        blanket.options("reporter", "../node_modules/grunt-mocha-blanket/support/grunt-reporter.js");
     }
 </script>
 ```
@@ -111,7 +105,7 @@ If you want to see blanketJS coverage reports in the browser as well (useful for
 coverage and which do not) include this snippet it in your test html blanket and mocha.
 
 ```html
-<script type="text/javascript" src="../node_modules/grunt-blanket-mocha/support/mocha-blanket.js"></script>
+<script type="text/javascript" src="../node_modules/grunt-mocha-blanket/support/mocha-blanket.js"></script>
 ```
 
 NOTE: The above path is assuming that the specs are being run from a directory one deeper than the root directory.
@@ -247,6 +241,11 @@ For example, if you only wanted to run specs that match the word "login" you cou
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+## 0.6.1
+*Released 28 September 2016*
+
+* Update PhantomJS to 2.x.
 
 ## 0.4.1
 *Released 17 June 2014*

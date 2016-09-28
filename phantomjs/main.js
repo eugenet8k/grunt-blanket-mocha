@@ -2,9 +2,7 @@
  * grunt-lib-phantomjs
  * http://gruntjs.com/
  *
- * Modified for mocha-grunt by Kelly Miyashiro
- *
- * Copyright (c) 2012 "Cowboy" Ben Alman, contributors
+ * Copyright (c) 2016 "Cowboy" Ben Alman, contributors
  * Licensed under the MIT license.
  */
 
@@ -13,14 +11,17 @@
 'use strict';
 
 var fs = require('fs');
-var _ = require('lodash');
+var system = require('system');
 
 // The temporary file used for communications.
-var tmpfile = phantom.args[0];
+var tmpfile = system.args[1];
 // The page .html file to load.
-var url = phantom.args[1];
+var url = system.args[2];
 // Extra, optionally overridable stuff.
-var options = JSON.parse(phantom.args[2] || {});
+var options = JSON.parse(system.args[3] || {});
+
+// Default options.
+if (!options.timeout) { options.timeout = 5000; }
 
 // Keep track of the last time a client message was sent.
 var last = new Date();
@@ -35,31 +36,31 @@ var sendMessage = function(arg) {
 // This allows grunt to abort if the PhantomJS version isn't adequate.
 sendMessage('private', 'version', phantom.version);
 
+// Create a new page.
+var page = require('webpage').create(options.page);
+
 // Abort if the page doesn't send any messages for a while.
 setInterval(function() {
   if (new Date() - last > options.timeout) {
     sendMessage('fail.timeout');
+    if (options.screenshot) {
+      page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
+    }
     phantom.exit();
   }
 }, 100);
 
-// Create a new page.
-var page = require('webpage').create();
 
 // Inject bridge script into client page.
 var injected;
 var inject = function() {
   if (injected) { return; }
   // Inject client-side helper script.
+  var scripts = Array.isArray(options.inject) ? options.inject : [options.inject];
   sendMessage('inject', options.inject);
-  page.injectJs(options.inject);
+  scripts.forEach(page.injectJs);
   injected = true;
 };
-
-// Merge phantomjs page settings from options.page
-if (options.page) {
-  _.merge(page, options.page);
-}
 
 // Keep track if the client-side helper script already has been injected.
 page.onUrlChanged = function(newUrl) {
@@ -91,16 +92,20 @@ page.onConsoleMessage = function(message) {
 
 // For debugging.
 page.onResourceRequested = function(request) {
-  sendMessage('onResourceRequested', request.url);
+  sendMessage('onResourceRequested', request);
 };
 
 page.onResourceReceived = function(request) {
   if (request.stage === 'end') {
-    sendMessage('onResourceReceived', request.url);
+    sendMessage('onResourceReceived', request);
   }
 };
 
 page.onError = function(msg, trace) {
+  sendMessage('error.onError', msg, trace);
+};
+
+phantom.onError = function(msg, trace) {
   sendMessage('error.onError', msg, trace);
 };
 
@@ -128,11 +133,17 @@ page.onInitialized = function() {
 
 // Run when the page has finished loading.
 page.onLoadFinished = function(status) {
+  // reset this handler to a no-op so further calls to onLoadFinished from iframes don't affect us
+  page.onLoadFinished = function() { /* no-op */};
+
   // The window has loaded.
   sendMessage('onLoadFinished', status);
   if (status !== 'success') {
     // File loading failure.
     sendMessage('fail.load', url);
+    if (options.screenshot) {
+      page.render(['page-at-timeout-', Date.now(), '.jpg'].join(''));
+    }
     phantom.exit();
   }
 };

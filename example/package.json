@@ -2,7 +2,7 @@
   "name": "grunt-blanket-mocha-test",
   "description": "Test for grunt-blanket-mocha.",
   "version": "0.5.1",
-  "homepage": "https://github.com/ModelN/grunt-blanket-mocha",
+  "homepage": "https://github.com/eugenet8k/grunt-mocha-blanket-test",
   "author": {
     "name": "Dave Cadwallader",
     "email": "dcadwallader@gmail.com"
@@ -16,11 +16,16 @@
   "engines": {
     "node": ">= 0.8.0"
   },
+  "scripts": {
+    "grunt": "grunt",
+    "test": "grunt test"
+  },
   "devDependencies": {
-    "grunt-blanket-mocha": "0.4.2",
-    "grunt": "0.4.1",
-    "mocha": "2.0.1",
+    "blanket": "1.1.6",
     "chai": "1.8.1",
-    "blanket": "1.1.6"
+    "grunt-mocha-blanket": "0.6.1",
+    "grunt-cli": "1.2.0",
+    "grunt": "0.4.5",
+    "mocha": "2.0.1"
   }
 }

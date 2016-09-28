@@ -1,29 +1,35 @@
 {
-  "name": "grunt-blanket-mocha",
+  "name": "grunt-mocha-blanket",
   "description": "Headless Blanket.js code coverage and Mocha testing via PhantomJS",
-  "version": "0.5.0",
-  "homepage": "https://github.com/ModelN/grunt-blanket-mocha",
+  "version": "0.6.1",
+  "homepage": "https://github.com/eugenet8k/grunt-mocha-blanket",
   "author": {
     "name": "Dave Cadwallader",
     "email": "dcadwallader@gmail.com",
     "url": "http://geekdave.com"
   },
-  "contributors": {
-    "name": "Sean Coker",
-    "email": "hello@sean.is",
-    "url": "http://sean.is"
-  },
+  "contributors": [
+    {
+      "name": "Sean Coker",
+      "email": "hello@sean.is",
+      "url": "http://sean.is"
+    },
+    {
+      "name": "Eugene Tiutiunnyk",
+      "email": "eugenet8k@gmail.com"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ModelN/grunt-blanket-mocha.git"
+    "url": "git@github.com:eugenet8k/grunt-mocha-blanket.git"
   },
   "bugs": {
-    "url": "https://github.com/ModelN/grunt-blanket-mocha/issues"
+    "url": "https://github.com/eugenet8k/grunt-mocha-blanket/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/ModelN/grunt-blanket-mocha/blob/master/LICENSE-MIT"
+      "url": "https://github.com/eugenet8k/grunt-mocha-blanket/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",
@@ -31,29 +37,31 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/grunt test"
+    "grunt": "grunt",
+    "test": "grunt test"
   },
   "dependencies": {
     "blanket": "~1.1.6",
-    "grunt-lib-phantomjs": "~0.6.0",
-    "mocha": "~2.0.1",
-    "lodash": "~2.4.1"
+    "grunt-lib-phantomjs": "1.0.0",
+    "lodash": "~2.4.1",
+    "mocha": "~2.0.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4"
+    "grunt": "0.4.5"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-jshint": "~0.7.1"
+    "grunt-cli": "1.2.0",
+    "grunt-contrib-connect": "1.0.2",
+    "grunt-contrib-jshint": "1.0.0",
+    "grunt": "0.4.5"
   },
   "keywords": [
-    "gruntplugin",
     "blanket",
     "blanketjs",
     "coverage",
+    "gruntplugin",
     "mocha",
-    "test",
-    "phantomjs"
+    "phantomjs",
+    "test"
   ]
 }

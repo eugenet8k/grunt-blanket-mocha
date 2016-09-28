@@ -33,43 +33,41 @@
         }
 
         sendMessage('mocha.' + ev, data);
-
       });
     }
 
     // 1.4.2 moved reporters to Mocha instead of mocha
     var mochaInstance = window.Mocha || window.mocha;
-    
+
     function createBlanketReporter(runner) {
-        runner.on('start', function() {
-            window.blanket.setupCoverage();
-        });
+      runner.on('start', function() {
+        window.blanket.setupCoverage();
+      });
 
-        runner.on('end', function() {
-            window.blanket.onTestsDone();
-        });
+      runner.on('end', function() {
+        window.blanket.onTestsDone();
+      });
 
-        runner.on('suite', function() {
-            window.blanket.onModuleStart();
-        });
+      runner.on('suite', function() {
+        window.blanket.onModuleStart();
+      });
 
-        runner.on('test', function() {
-            window.blanket.onTestStart();
-        });
+      runner.on('test', function() {
+        window.blanket.onTestStart();
+      });
 
-        runner.on('test end', function(test) {
-            window.blanket.onTestDone(test.parent.tests.length, test.state === 'passed');
-        });
+      runner.on('test end', function(test) {
+        window.blanket.onTestDone(test.parent.tests.length, test.state === 'passed');
+      });
 
-        //I dont know why these became global leaks
-        runner.globals(['stats', 'failures', 'runner']);
+      //I dont know why these became global leaks
+      runner.globals(['stats', 'failures', 'runner']);
     }
 
     // 1.4.2 moved reporters to Mocha instead of mocha
     var mochaInstance = window.Mocha || window.mocha;
 
-    var GruntReporter = function(runner){
-
+    var GruntReporter = function(runner) {
       if (!mochaInstance) {
         throw new Error('Mocha was not found, make sure you include Mocha in your HTML spec file.');
       }
@@ -95,7 +93,6 @@
       }
 
       createBlanketReporter(runner);
-
     };
 
     var Klass = function () {};
@@ -105,12 +102,10 @@
     var options = window.PHANTOMJS;
     // Default mocha options
     var config = {
-          ui: 'bdd',
-          ignoreLeaks: true,
-          reporter: GruntReporter
-        },
-        run = options.run || false,
-        key;
+        ui: 'bdd',
+        ignoreLeaks: true,
+        reporter: GruntReporter
+      };
 
     if (options) {
       // If options is a string, assume it is to set the UI (bdd/tdd etc)
@@ -118,16 +113,12 @@
         config.ui = options;
       } else {
         // Extend defaults with passed options
-        for (key in options.mocha) {
+        for (var key in options.mocha) {
           config[key] = options.mocha[key];
         }
       }
     }
 
     mocha.setup(config);
-
-    // task option `run`, automatically runs mocha for grunt only
-    if (run) {
-      mocha.run();
-    }
+    mocha.run();
 }());
