@@ -37,3 +37,11 @@ exports.reduceStats = function(stats) {
 exports.formatMs = function(ms) {
   return (Math.ceil(ms * 100) / 100000).toFixed(2);
 }
+
+/*
+* Overriding XUnit reporter from mochajs. Due to bug described in:
+* https://github.com/mochajs/mocha/issues/2297
+* https://github.com/kmiyashiro/grunt-mocha/issues/163
+*/
+var reporters = require('mocha').reporters;
+reporters['XUnit'] = require('./xunit');

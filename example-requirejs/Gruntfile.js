@@ -4,24 +4,31 @@ module.exports = function(grunt) {
     "use strict";
 
     grunt.initConfig({
-
-        blanket_mocha : {
-            test: {
-                src: ['test.html'],
-                options : {
-                    threshold : 60,
-                    globalThreshold : 65,
-                    log : true,
-                    logErrors: true,
-                    moduleThreshold : 60,
-                    modulePattern : "./src/(.*?)/",
-                    customThreshold: {
-                        './src/spelling/plurals.js': 50
-                    }
-                }
+      blanket_mocha : {
+        options : {
+          threshold : 60,
+          globalThreshold : 65,
+          log : true,
+          logErrors: true,
+          moduleThreshold : 60,
+          modulePattern : "./src/(.*?)/",
+          customThreshold: {
+              './src/spelling/plurals.js': 50
+          }
+        },
+        test: {
+          src: ['test.html'],
+        },
+        xunit: {
+          src: ['test.html'],
+          options : {
+            reporter: 'XUnit',
+            reporterOptions: {
+              output: 'test-results.xml'
             }
-
+          }
         }
+      }
     });
 
     // Loading dependencies
@@ -31,6 +38,7 @@ module.exports = function(grunt) {
         }
     }
 
-    grunt.registerTask('coverage', ['blanket_mocha']);
+    grunt.registerTask('coverage', ['blanket_mocha:test']);
+    grunt.registerTask('xunit', ['blanket_mocha:xunit']);
     grunt.registerTask('default', ['blanket_mocha']);
 };

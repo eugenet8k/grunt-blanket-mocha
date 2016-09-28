@@ -306,6 +306,7 @@ module.exports = function(grunt) {
 
         // Only hijack if we really need to
         if (dest) {
+            grunt.file.delete(dest);
             console.log = function() {
                 consoleLog.apply(console, arguments);
                 // FIXME: This breaks older versions of mocha
@@ -351,7 +352,7 @@ module.exports = function(grunt) {
                     if (Reporter === null) {
                         grunt.fatal('Specified reporter is unknown or unresolvable: ' + options.reporter);
                     }
-                    reporter = new Reporter(runner);
+                    reporter = new Reporter(runner, options);
 
                     // Launch PhantomJS.
                     phantomjs.spawn(url, {
@@ -401,7 +402,11 @@ module.exports = function(grunt) {
                     if (dest) {
                         // Restore console.log to original and write the output
                         console.log = consoleLog;
-                        grunt.file.write(dest, output.join('\n'));
+
+                        if (!grunt.file.exists(dest)) {
+                          // Write only if our reporter ignored our `output` option
+                          grunt.file.write(dest, output.join('\n'));
+                        }
                     }
                     grunt.log.writeln();
 
