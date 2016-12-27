@@ -26,7 +26,7 @@ configurations of that plugin as of that version.  Please see that repo for more
 Changes from the upstream plugin will be merged periodically.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.5`
+This plugin requires Grunt `~1.0.0`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -42,8 +42,8 @@ grunt.loadNpmTasks('grunt-mocha-blanket');
 
 ## Dependencies
 
-* Blanket.js (tested with v1.1.6)
-* Mocha (tested with v2.0.1)
+* Blanket.js (tested with v1.2.3)
+* Mocha (tested with v3.2.0)
 
 ## The "blanket_mocha" task
 
@@ -242,15 +242,21 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+## 0.6.6
+*Released 27 December 2016*
+
+* Update npm dependencies
+
+
 ## 0.6.1
 *Released 28 September 2016*
 
-* Update PhantomJS to 2.x.
+* Update PhantomJS to 2.x
 
 ## 0.4.1
 *Released 17 June 2014*
 
-* Better filename matching, and other misc fixes.
+* Better filename matching, and other misc fixes
 
 ## 0.4.0
 *Released 2 February 2014*

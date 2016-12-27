@@ -1,5 +1,11 @@
 # History
 
+## 0.6.6
+* Update npm dependencies
+
+## 0.6.1
+* Update PhantomJS to 2.x
+
 ## 0.4.10
 * Actually error out if `logErrors` is true and error
 
