@@ -2,15 +2,15 @@
 * Mocha-BlanketJS adapter
 * Adds a BlanketJS coverage report at the bottom of the HTML Mocha report
 * Only needed for in-browser report; not required for the grunt/phantomjs task
-* 
+*
 * Distributed as part of the grunt-blanket-mocha plugin
 * https://github.com/ModelN/grunt-blanket-mocha
 * (C)2013 Model N, Inc.
 * Distributed under the MIT license
-* 
+*
 * Code originally taken from the BlanketJS project:
 * https://github.com/alex-seville/blanket/blob/master/src/adapters/mocha-blanket.js
-* Distributed under the MIT license 
+* Distributed under the MIT license
 */
 (function() {
 
@@ -54,7 +54,7 @@
                 blanket.onTestStart();
             });
 
-            runner.on('test end', function(test) {                
+            runner.on('test end', function(test) {
                 blanket.onTestDone(test.parent.tests.length, test.state === 'passed');
             });
 
@@ -64,14 +64,8 @@
             originalReporter.apply(this, [runner]);
         };
 
-    // From mocha.js HTML reporter
-    blanketReporter.prototype.suiteURL = function(suite){
-      return '?grep=' + encodeURIComponent(suite.fullTitle());
-    };
-
-    blanketReporter.prototype.testURL = function(test){
-      return '?grep=' + encodeURIComponent(test.fullTitle());
-    };
+    // Just reusing original prototype to avoid errors when new methods are added
+    blanketReporter.prototype = originalReporter.prototype;
 
     mocha.reporter(blanketReporter);
     var oldRun = mocha.run,
