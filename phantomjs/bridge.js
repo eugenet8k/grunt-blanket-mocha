@@ -10,6 +10,11 @@
 /*global mocha:true, alert:true, window:true */
 
 (function() {
+    // 1.4.2 moved reporters to Mocha instead of mocha
+    var mochaInstance = window.Mocha || window.mocha;
+    if (!mochaInstance || !window.blanket) return;
+    // TODO: Add error message?
+
     // Send messages to the parent phantom.js process via alert! Good times!!
     function sendMessage() {
       var args = [].slice.call(arguments);
@@ -36,9 +41,6 @@
       });
     }
 
-    // 1.4.2 moved reporters to Mocha instead of mocha
-    var mochaInstance = window.Mocha || window.mocha;
-
     function createBlanketReporter(runner) {
       runner.on('start', function() {
         window.blanket.setupCoverage();
@@ -63,9 +65,6 @@
       //I dont know why these became global leaks
       runner.globals(['stats', 'failures', 'runner']);
     }
-
-    // 1.4.2 moved reporters to Mocha instead of mocha
-    var mochaInstance = window.Mocha || window.mocha;
 
     var GruntReporter = function(runner) {
       if (!mochaInstance) {
