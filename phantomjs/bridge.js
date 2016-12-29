@@ -10,6 +10,16 @@
 /*global mocha:true, alert:true, window:true */
 
 (function() {
+    // 1.4.2 moved reporters to Mocha instead of mocha
+    var mochaInstance = window.Mocha || window.mocha;
+    if (!mochaInstance) {
+      throw new Error('Mocha was not found, make sure you include Mocha in your HTML spec file.');
+    }
+
+    if (!window.blanket) {
+      throw new Error('Blanket was not found, make sure you include Blanket in your HTML spec file.');
+    }
+
     // Send messages to the parent phantom.js process via alert! Good times!!
     function sendMessage() {
       var args = [].slice.call(arguments);
@@ -36,9 +46,6 @@
       });
     }
 
-    // 1.4.2 moved reporters to Mocha instead of mocha
-    var mochaInstance = window.Mocha || window.mocha;
-
     function createBlanketReporter(runner) {
       runner.on('start', function() {
         window.blanket.setupCoverage();
@@ -64,14 +71,7 @@
       runner.globals(['stats', 'failures', 'runner']);
     }
 
-    // 1.4.2 moved reporters to Mocha instead of mocha
-    var mochaInstance = window.Mocha || window.mocha;
-
     var GruntReporter = function(runner) {
-      if (!mochaInstance) {
-        throw new Error('Mocha was not found, make sure you include Mocha in your HTML spec file.');
-      }
-
       // Setup HTML reporter to output data on the screen
       mochaInstance.reporters.HTML.call(this, runner);
 
