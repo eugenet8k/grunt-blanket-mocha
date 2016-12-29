@@ -4,21 +4,8 @@
     <meta charset="utf-8">
     <title>Mocha Tests</title>
     <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
-    <script src="node_modules/requirejs/require.js"></script>
-    <script>
-        //load main js first, this will load all the
-        //script dependencies
-        require(["main"], function(main) {
-          mocha.setup('bdd');
-
-          require(["test/test-loader"],
-            function(TestLoader) {
-              //start running the mocha tests
-              TestLoader.start();
-          });
-        });
-
-    </script>
+    <script src="node_modules/requirejs/require.js"
+      data-main="test/initialize"></script>
 </head>
 <body>
   <div id="mocha"></div>

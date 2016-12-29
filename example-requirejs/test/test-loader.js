@@ -1,6 +1,7 @@
-define(["chai", "test/test-suite"], function(chai) {
+define(["chai"], function (chai) {
   "use strict";
 
+  mocha.setup('bdd');
   chai.Assertion.includeStack = true;
 
   // http://chaijs.com/api/bdd/
