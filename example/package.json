@@ -23,7 +23,7 @@
   "devDependencies": {
     "blanket": "~1.2.3",
     "chai": "1.8.1",
-    "grunt-mocha-blanket": "0.6.7",
+    "grunt-mocha-blanket": "0.6.8",
     "grunt": "~1.0.1",
     "mocha": "~3.2.0"
   }
