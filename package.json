@@ -45,7 +45,7 @@
     "grunt-lib-phantomjs": "1.1.0",
     "lodash": "2.4.1",
     "mkdirp": "0.5.1",
-    "mocha": "3.2.0"
+    "mocha": "3.4.2"
   },
   "devDependencies": {
     "grunt-contrib-connect": "1.0.2",
